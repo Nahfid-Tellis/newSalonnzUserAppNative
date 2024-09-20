@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -24,6 +24,9 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+// Import SplashScreen
+import SplashScreen from 'react-native-splash-screen';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -61,6 +64,19 @@ function App(): React.JSX.Element {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  // Use useEffect to hide the splash screen after the app is ready
+  useEffect(() => {
+    const hideSplashScreen = async () => {
+      // Perform any necessary async operations here
+      // For example, you might want to fetch initial data or check authentication status
+
+      // After all initialization is done, hide the splash screen
+      SplashScreen.hide();
+    };
+
+    hideSplashScreen();
+  }, []); // Empty dependency array means this effect runs once on mount
 
   return (
     <SafeAreaView style={backgroundStyle}>
